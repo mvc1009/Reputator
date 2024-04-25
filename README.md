@@ -8,6 +8,7 @@ Python3 script that scraps mxtoolbox in order to find if a list of IPs are black
 ```
 pip3 install selenium
 pip3 install beautifulsoup4
+pip3 install python-docx
 ```
 
 ## Usage
