@@ -1,4 +1,4 @@
-import sys
+import sys, json
 from docx import *
 from docx.shared import *
 from docx.enum.text import WD_ALIGN_PARAGRAPH
