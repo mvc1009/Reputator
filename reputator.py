@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup 
+import ipcalc
 
 #
 # Usage: python3 reputator.py ips.txt out.json
@@ -30,7 +31,7 @@ def get_reputation(ip):
 		elem.clear()
 		elem.send_keys(ip)
 		elem.send_keys(Keys.RETURN)
-		time.sleep(6)
+		time.sleep(12)
 		assert "known blacklists" in driver.page_source
 		html = driver.page_source
 		driver.close()
@@ -64,10 +65,17 @@ output = []
 f = open(sys.argv[1], 'r')
 ips = f.read().split('\n')
 for ip in ips:
-	a = None
-	while not a:
-		a = get_reputation(ip)
-		
+	if '/' in ip:
+		for lip in ipcalc.Network(ip):
+			a = None
+			while not a:
+				a = get_reputation(ip)
+			output.append(a)
+	else:
+		a = None
+		while not a:
+			a = get_reputation(ip)
+			
 	# Adding the results to the output variable
 	output.append(a)
 	
